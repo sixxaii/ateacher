@@ -1,0 +1,33 @@
+<div class="container nopadding group" *ngIf="group">
+    <div class="group-header">
+        <p class="title">
+            {{ group.name }}
+        </p>
+        <a *ngIf="hasAccess(4)" routerLink="/group/{{groupId}}/add" class="text-muted results ml-auto">Добавить пользователя</a>
+    </div>
+    <div class="group-body box">
+        <table class="table users-table">
+            <thead>
+                <th class="text-center">Имя пользователя</th>
+                <th class="text-center">ФИО</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of group.members">
+                    <td class="text-center">{{ user.username }}</td>
+                    <td class="text-center">
+                        {{ user.lastname + ' ' + user.firstname + ' ' + user.middlename }}
+                    </td>
+                    <td *ngIf="hasAccess(4)">
+                        <button type="button" class="close" aria-label="Close"
+                            (click)="removeUser(user)">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>  
+
+

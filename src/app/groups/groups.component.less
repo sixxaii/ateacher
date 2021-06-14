@@ -1,0 +1,141 @@
+.no-groups {
+    margin-top: 30px;
+}
+
+@import "../../colors.less";
+
+.nopadding {
+    padding: 0;
+}
+
+.box {
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 15px;
+}
+
+.groups {
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    
+        .title {
+            font-size: 24px;
+            font-weight: 400;
+        }
+    
+        .search {
+            font-size: 16px;
+            font-weight: 400;
+            position: relative;
+    
+            &-input {
+                border: 3px solid @purple;
+                border-radius: 15px;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+    
+            &-btn {
+                background-color: @purple;
+                border-radius: 15px;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                color: @white;
+                text-transform: uppercase;
+            }
+        }
+
+        .create {
+            &-btn {
+                background-color: @purple;
+                color: @white;
+                outline: none;
+                border: none;
+            }
+        }
+    }
+
+    &-nav {
+        background-color: @lpurple;
+        font-weight: bold;
+        font-size: 18px;
+
+        .nav-item {
+            position: relative;
+            margin-right: 40px;
+        }
+
+        .nav-item:hover {
+            color: @purple;
+        }
+        .active, .nav-item:focus, .nav-item:active {
+            color: @purple;
+        }
+
+        .active:focus::after, .active::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background-color: @purple;
+            bottom: -7px;
+            left: 0;
+            border-radius: 5px;
+        }
+    }
+    
+    .group-list {
+        display: flex;
+        flex-flow: row wrap;
+        padding: 35px 0px;
+        justify-content: center;
+        
+        &__item {
+            flex-grow: 1;
+            flex: 0 0 31%;
+            text-align: center;
+            align-self: stretch;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 15px 10px;
+            padding: 20px 30px;
+    
+            .group-title {
+                font-weight: bold;
+                font-size: 18px;
+                margin-bottom: 0;
+            }
+
+            .delete {
+                margin-bottom: 15px;
+            }
+    
+            .group-description {
+                text-align: left;
+                font-size: 16px;
+            }
+    
+            .group-btn {
+                background-color: @white;
+                border-radius: 25px;
+                border: 3px solid @purple;
+                color: @purple;
+                text-transform: uppercase;
+                font-size: 18px;
+                width: 180px;
+                transition: 0.2s;
+                max-height: 40px;
+                padding: 3px 0;
+    
+                &:hover {
+                    background-color: @purple;
+                    color: @white;
+                }
+            }
+        }
+    }
+}

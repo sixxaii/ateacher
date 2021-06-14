@@ -1,0 +1,89 @@
+<div class="container nopadding task" *ngIf="task">
+    <div class="task-header">
+        <p class="title">
+            {{ task.name }}
+        </p>
+        <a routerLink="/course/{{courseId}}/task/{{taskId}}/results" class="text-muted results ml-auto">Попытки</a>
+    </div>
+    <div class="task-body box">
+        <div class="row task__item">
+            <div class="col-sm-12">
+                <div class="row justify-content-between">
+                    <div class="tasks-description col-sm-10">
+                        <div class="row task-description__item">
+                            <div class="col-sm-12">
+                                <h6>Условие</h6>
+                                <div class="task-description-text" [innerHTML]="task.legend">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row task-description__item">
+                            <div class="col-sm-12">
+                                <div class="task-data">
+                                    <h6>Входные данные</h6>
+                                    <div [innerHTML]="task.input">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row task-description__item">
+                            <div class="col-sm-12">
+                                <div class="task-data">
+                                    <h6>Выходные данные</h6>
+                                    <div [innerHTML]="task.output">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-inner-cards col-sm-2">
+                        <div class="row align-items-end flex-column">
+                            <div class="task-inner-card card text-center bg-light">
+                                <div class="card-header">
+                                    <h6>Время</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        {{ task.timeLimit }}с
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="task-inner-card card text-center bg-light">
+                                <div class="card-header">
+                                    <h6>Память</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        {{ task.memoryLimit }}мб
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="form-group custom-file">
+            <input type="file" class="custom-file-input" id="validatedCustomFile" (change)="setFileData($event.target.files)">
+            <label class="custom-file-label" for="validatedCustomFile">Выбрать файл...</label>
+        </div>
+        <div class="form-group input-file">
+            <select (change)="setCompiler($event.target.value)" class="form-control">
+                <option disabled selected>Компилятор</option>
+                <option *ngFor="let compiler of compilers" [value]="compiler.id">{{ compiler.name }}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button [disabled]="loading" class="load btn btn-info" (click)="onSubmit()">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Загрузить
+            </button>
+            <div *ngIf="message" class="alert alert-info mt-3 mb-0">{{message}}</div>
+        </div>
+
+        
+    </div>
+</div>  
+
+

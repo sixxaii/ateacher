@@ -1,0 +1,42 @@
+@import "../../../colors.less";
+
+.box {
+    //box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border: 1px solid @lpurple;
+    padding: 20px 20px;
+    border-radius: 15px;
+}
+
+.import {
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    
+        .title {
+            font-size: 24px;
+            font-weight: 400;
+            
+        }
+    }
+
+    &-body {
+        display: flex;
+        justify-content: center;
+
+        .table {
+            max-width: 40%;
+            margin: 0 auto;
+            thead {
+                background-color: @lpurple;
+            }
+        }
+    }
+
+    &-btn {
+        background-color: @purple;
+        color: @white;
+        outline: none;
+        border: none;
+    }
+}

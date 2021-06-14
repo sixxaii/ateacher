@@ -1,0 +1,118 @@
+<!-- <div *ngIf="hasAccess(4)">
+    <div class="row groups-head">
+        <div class="col-sm-3">
+            <h1>Группы</h1>
+        </div>
+        <div class="col-sm-3 ml-auto">
+            <button routerLink="/groups/create" class="btn btn-info float-right">Создание группы</button>
+        </div>
+    </div>
+    <div class="row filters-row justify-content-end">
+        <div class="search-row col-sm-12">
+            <div class="input-group">
+                <input type="text" [(ngModel)]="filter.q" class="form-control"
+                    (keyup)="search($event.target.value)"
+                    placeholder="Поиск по названию">
+                <div class="input-group-append">
+                    <button class="btn btn-info" type="button">Поиск</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="message" class="alert alert-info mt-3 mb-0">{{message}}</div>
+    <div class="groups" *ngIf="groups">
+        <div *ngFor="let group of (groups | filter:filter.q)" class="row groups__item">
+            <div class="col-sm-12">
+                <div class="groups-card card">
+                    <div class="card-header card-outer-header">
+                        <h4>
+                            <a routerLink='/group/{{group.id}}'>{{ group.name }}</a>
+                        </h4>
+                        <a class="text-muted delete" (click)="removeGroup(group)">Удалить группу</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="(groups | filter:filter.q).length < 1" class="no-groups alert alert-secondary"> 
+            Групп не найдено
+        </div>
+    </div>    
+</div>
+
+<div *ngIf="!hasAccess(4)">
+    <div class="alert alert-danger mt-3 mb-0">Недостаточно прав</div>
+</div> -->
+
+<div class="container nopadding">
+    <div class="groups-header">
+        <p class="title">
+            Группы
+        </p>
+        <div class="search">
+            <form class="form-inline">
+                <input type="text" [(ngModel)]="filter.q" class="form-control search-input" aria-label="Search" name="search"
+                    (keyup)="search($event.target.value)"
+                    placeholder="Поиск..">
+                <button class="btn btn-rounded search-btn" type="submit">Найти</button>
+            </form>
+        </div>
+        <div class="create">
+            <button routerLink="/groups/create" class="btn btn-info float-right create-btn">Создание группы</button>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="groups" *ngIf="groups">
+        <div class="list">
+            <ul class="group-list">
+                <li *ngFor="let group of (groups | filter:filter.q); let i = index" class="group-list__item box"> 
+                    <p class="group-title">{{ group.name }}</p>
+                    <a class="text-muted delete" (click)="removeGroup(group)">Удалить группу</a>
+                    <p class="group-description">
+                        Описание группы {{i+1}}
+                    </p>
+                    <button routerLink='/group/{{group.id}}' type="button" class="btn group-btn">Перейти</button>
+                </li>
+                <!-- <li class="group-list__item box"> 
+                    <p class="group-title">Название группы</p>
+                    <p class="group-description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus quibusdam deserunt quasi sequi neque esse iusto, delectus commodi nostrum repellat eum quis veritatis cum a fugit nihil omnis et obcaecati?
+                    </p>
+                    <button type="button" class="btn group-btn">Перейти</button>
+                </li>
+                <li class="group-list__item box"> 
+                    <p class="group-title">Название группы</p>
+                    <p class="group-description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus quibusdam deserunt quasi sequi neque esse iusto, delectus commodi nostrum repellat eum quis veritatis cum a fugit nihil omnis et obcaecati?
+                    </p>
+                    <button type="button" class="btn group-btn">Перейти</button>
+                </li>
+                <li class="group-list__item box"> 
+                    <p class="group-title">Название группы</p>
+                    <p class="group-description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus quibusdam deserunt quasi sequi neque esse iusto, delectus commodi nostrum repellat eum quis veritatis cum a fugit nihil omnis et obcaecati?
+                    </p>
+                    <button type="button" class="btn group-btn">Перейти</button>
+                </li>
+                <li class="group-list__item box"> 
+                    <p class="group-title">Название группы</p>
+                    <p class="group-description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus quibusdam deserunt quasi sequi neque esse iusto, delectus commodi nostrum repellat eum quis veritatis cum a fugit nihil omnis et obcaecati?
+                    </p>
+                    <button type="button" class="btn group-btn">Перейти</button>
+                </li>
+                <li class="group-list__item box"> 
+                    <p class="group-title">Название группы</p>
+                    <p class="group-description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus quibusdam deserunt quasi sequi neque esse iusto, delectus commodi nostrum repellat eum quis veritatis cum a fugit nihil omnis et obcaecati?
+                    </p>
+                    <button type="button" class="btn group-btn">Перейти</button>
+                </li> -->
+            </ul>
+        </div>
+        <div *ngIf="(groups | filter:filter.q).length < 1" class="no-groups alert alert-secondary"> 
+            Групп не найдено
+        </div>
+    </div>
+</div>

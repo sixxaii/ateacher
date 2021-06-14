@@ -1,0 +1,42 @@
+<div *ngIf="hasAccess(4)">
+    <div class="addTask" *ngIf="tasks">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="addTask-card card">
+                    <div class="card-header">
+                        <h5>Добавить задачу</h5>
+                        <button routerLink="/tasks/import" class="btn btn-info float-right">Импорт задачи</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table tasks-table">
+                            <thead>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Название</th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let task of tasks">
+                                    <td class="text-center">{{ task.id }}</td>
+                                    <td class="text-center">
+                                        <a routerLink='/task/{{task.id}}'>{{ task.name }}</a>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="close add" aria-label="Add"
+                                                (click)="addTask(task)">
+                                            <span aria-hidden="true">+</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </div>
+                        <div *ngIf="message" class="alert alert-info mt-3 mb-0">{{message}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+
+<div *ngIf="!hasAccess(4)">
+    <div class="alert alert-danger mt-3 mb-0">Недостаточно прав</div>
+</div>

@@ -1,0 +1,44 @@
+<div *ngIf="hasAccess(4)">
+    <div class="container nopadding addUser" *ngIf="users">
+        <div class="addUser-header">
+            <p class="title">
+                Добавить пользователя
+            </p>
+        </div>
+    
+        <div class="addUser box" *ngIf="users">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="addUser-body">
+                        <table class="table users-table">
+                            <thead>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Название</th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let user of users">
+                                    <td class="text-center">{{ user.username }}:</td>
+                                    <td class="text-center">
+                                        {{ user.lastname + ' ' + user.firstname + ' ' + user.middlename }}
+                                    </td>
+                                    <td>
+                                        <button type="button" class="close add" aria-label="Add"
+                                                (click)="addUser(user)">
+                                            <span aria-hidden="true">+</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div *ngIf="message" class="alert alert-info mt-3 mb-0">{{message}}</div>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+
+<div *ngIf="!hasAccess(4)">
+    <div class="alert alert-danger mt-3 mb-0">Недостаточно прав</div>
+</div>

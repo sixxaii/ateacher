@@ -1,0 +1,58 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="left-col">
+                <div class="user-info box">
+                    <div class="photo">
+                        <img src="../../assets/img/icons/user.png" alt="">
+                    </div>
+                    <p class="name">{{ currentUser.firstname + ' ' + currentUser.lastname }}</p>
+                </div>
+                <div class="groups common-list">
+                    <div class="title">
+                        <p>Группы</p>
+                        <button class="common-list__btn btn" type="button" data-toggle="collapse" data-target="#groups__collapse"
+                                aria-expanded="false" aria-controls="groups__collapse">
+                        </button>
+                    </div>
+                    <div class="list group-list groups__collapse collapse show" id="groups__collapse">
+                        <ul>
+                            <li *ngFor="let group of groups;" class="group-list__item"> 
+                                <p>{{ group.name }}</p>
+                                <a routerLink="/group/{{group.id}}">
+                                    <i class="far fa-arrow-alt-circle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="right-col">
+                <div class="courses common-list">
+                    <div class="title">
+                        <p>Курсы</p>
+                        <button class="common-list__btn btn" type="button" data-toggle="collapse" data-target="#courses__collapse"
+                                aria-expanded="false" aria-controls="courses__collapse">
+                        </button>
+                    </div>
+                    <div class="list courses__collapse collapse show" id="courses__collapse">
+                        <ul class="course-list">
+                            <li *ngFor="let course of courses" class="course-list__item box"> 
+                                <p class="course-title"> {{ course.name }} </p>
+                                <p class="course-description">
+                                    Создан: {{ course.owner }}
+                                </p>
+                                <p class="course-description">
+                                    {{ course.description }}
+                                </p>
+                                <button routerLink='/course/{{course.id}}' type="button" class="btn course-btn">Перейти</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>

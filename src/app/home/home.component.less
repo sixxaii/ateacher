@@ -1,0 +1,212 @@
+@import '../../colors.less';
+
+.box {
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 15px;
+}
+
+.common-list {
+    .title {
+        background-color: @lpurple;
+        font-size: 20px;
+        text-transform: uppercase;
+        font-weight: 400;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 15px;
+        padding: 10px 15px;
+        z-index: 2;
+        p {
+            margin: 0;
+        }
+    }
+
+    &__btn {
+        text-transform: none;
+        width: 30px;
+        height: 30px;
+        &.collapsed {
+            background: url('/assets/img/chevron-down.svg') no-repeat;
+            background-size: cover;
+        }
+        &:not(.collapsed) {
+            background: url('/assets/img/chevron-up.svg') no-repeat;
+            background-size: cover;
+        }
+        &.focus, &:focus {
+            outline: 0;
+            box-shadow: none!important;
+        }
+    }
+
+    .list {
+        border: 4px solid @lpurple;
+        border-top: none;
+        border-radius: 15px;
+        position: relative;
+        width: 100%;
+        top: -27px;
+        padding-top: 27px;
+        z-index: 1;
+        float: bottom;
+    }
+}
+
+.left-col {
+    .user-info {
+        width: 240px;
+        min-height: 210px;
+        text-align: center;
+        font-weight: bold;
+        padding: 40px 30px;
+        font-size: 18px;
+        margin: 0 auto;
+        margin-bottom: 50px;
+
+        p {
+            margin: 0;
+        }
+
+        .photo, img {
+            max-width: 80px;
+            max-height: 80px;
+            margin: 0 auto;
+        }
+
+        .photo {
+            margin-bottom: 20px;
+        }
+    }
+
+    .groups {
+        position: relative;
+    }
+
+    .group-list {
+        &__item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            font-weight: bold;
+            p {
+                margin: 0;
+            }
+            a {
+                .fa-arrow-alt-circle-right {
+                    font-size: 25px;
+                    color: @purple;
+                    transition: 0.2s;
+                    &:hover {
+                        color: @dpurple;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.right-col {
+    .courses {
+        position: relative;
+        margin-bottom: 30px;
+
+        .course-list {
+            display: flex;
+            flex-flow: row wrap;
+            padding: 35px 20px;
+            justify-content: center;
+            
+            &__item {
+                flex-grow: 1;
+                flex: 0 0 44%;
+                text-align: center;
+                align-self: stretch;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                justify-content: space-between;
+                margin: 15px 20px;
+                padding: 20px 30px;
+
+                .course-title {
+                    font-weight: bold;
+                    font-size: 18px;
+                }
+
+                .course-description {
+                    text-align: left;
+                    font-size: 16px;
+                }
+
+                .course-btn {
+                    background-color: @white;
+                    border-radius: 25px;
+                    border: 3px solid @purple;
+                    color: @purple;
+                    text-transform: uppercase;
+                    font-size: 18px;
+                    width: 180px;
+                    transition: 0.2s;
+                    max-height: 40px;
+                    padding: 3px 0;
+
+                    &:hover {
+                        background-color: @purple;
+                        color: @white;
+                    }
+                }
+            }
+        }
+    }
+
+    .contests {
+        position: relative;
+        margin-bottom: 30px;
+
+        .contest-list {
+            padding: 15px 40px;
+            &__item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 20px 30px;
+                margin: 35px 0;
+
+                .contest-info {
+                    margin-right: 20px;
+                }
+                
+                .contest-title {
+                    font-weight: bold;
+                    font-size: 18px;
+                }
+
+                .contest-description {
+                    font-weight: 400;
+                    font-size: 16px;
+                }
+                
+                a {
+                    .fa-arrow-alt-circle-right {
+                        font-size: 40px;
+                        color: @purple;
+                        transition: 0.2s;
+                        &:hover {
+                            color: @dpurple;
+                        }
+                    }
+                }
+            }
+
+            &__item:first-child {
+                margin-top: 20px;
+            }
+
+            &__item:last-child {
+                margin-bottom: 20px;
+            }
+
+        }
+    }
+}

@@ -1,0 +1,54 @@
+@import '../../../../colors.less';
+
+.box {
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 15px;
+}
+
+.course-list {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 35px 0px;
+    justify-content: center;
+    
+    &__item {
+        flex-grow: 1;
+        flex: 0 0 31%;
+        text-align: center;
+        align-self: stretch;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 15px 10px;
+        padding: 20px 30px;
+
+        .course-title {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .course-description {
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .course-btn {
+            background-color: @white;
+            border-radius: 25px;
+            border: 3px solid @purple;
+            color: @purple;
+            text-transform: uppercase;
+            font-size: 18px;
+            width: 180px;
+            transition: 0.2s;
+            max-height: 40px;
+            padding: 3px 0;
+
+            &:hover {
+                background-color: @purple;
+                color: @white;
+            }
+        }
+    }
+}

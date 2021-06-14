@@ -1,0 +1,27 @@
+<div class="container nopadding runs" *ngIf="runs">
+    <div class="runs-header">
+        <p class="title">
+            Попытки
+        </p>
+    </div>
+    <div class="runs-body box">
+        <table class="table runs-table">
+            <thead>
+                <th class="text-center">ID</th>
+                <th class="text-center">Тестов пройдено</th>
+                <th class="text-center">Вердикт</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let run of runs; let i = index">
+                    <td class="text-center">{{ i + 1 }}</td>
+                    <td class="text-center">
+                        {{ run.testsCount }}
+                    </td>
+                    <td class="text-center">
+                        {{ run.result }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>  

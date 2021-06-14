@@ -1,0 +1,32 @@
+@import "../../../colors.less";
+
+
+.box {
+    //box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border: 1px solid @lpurple;
+    padding: 20px 20px;
+    border-radius: 15px;
+}
+
+.course-create {
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+
+        .title {
+            font-size: 24px;
+            font-weight: 400;
+        }
+    }
+
+    form {
+        .btn {
+            background-color: @purple;
+            color: @white;
+            outline: none;
+            border: none;
+        }
+    }
+}

@@ -1,0 +1,481 @@
+<div class="container course" *ngIf="course">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="header">
+                <h1 class="header-title">
+                    {{ course.name }}
+                </h1>
+                <a *ngIf="isAdmin()" class="text-muted results ml-auto" data-toggle="modal" data-target="#addThemeModal">Добавить тему</a>
+                <p class="header-description">
+                    {{ course.description }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="themes">
+        <div *ngFor="let theme of course.courseThemes; let i = index" [attr.data-index]="i" class="row align-items-center theme">
+            <div class="col-sm-2">
+                <div class="theme-number">
+                    {{ i + 1 }}
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="theme-body">
+                    <h2 class="theme-title">
+                        {{ theme.name }} 
+                        <span class="removeTheme">
+                            <a *ngIf="isAdmin()" (click)="removeTheme(theme)" class="text-muted ml-auto">Удалить</a>
+                        </span>
+                    </h2>
+                    <div class="theme-description">
+                        {{ theme.description }} 
+                    </div>
+                    <div class="theme-lessons">
+                        <div class="theme-lessons__info">
+                            <div class="theme-lessons__img">
+                                <img src="/assets/img/theme-lessons.svg">
+                            </div>
+                            <div class="theme-lessons__count">
+                                {{ theme.themeLessons.length }} урок(ов), {{ countTasks(theme) }} задач(а/и)
+                            </div>
+                            <!-- <button class="theme-lessons__btn btn collapsed" type="button" data-toggle="collapse" data-target="#theme-lessons__collapse{{i+1}}"
+                                 aria-expanded="false" aria-controls="theme-lessons__collapse{{i+1}}">
+                            </button> -->
+                        </div>
+                        <div class="theme-lessons__collapse" id="theme-lessons__collapse{{i+1}}">
+                            <div *ngFor="let lesson of theme.themeLessons" class="theme-lesson">
+                                <div class="theme-lesson__header">
+                                    <h3 class="theme-lesson__title">
+                                        {{ lesson.name }}
+                                        <a *ngIf="isAdmin()" (click)="removeLesson(theme, lesson)" class="text-muted ml-auto">Удалить</a>
+                                        <span class="locked-text">Need lesson “lesson title” to unlock</span>
+                                    </h3>
+                                    <div class="locked-info">
+                                        <img src="/assets/img/lock.svg">
+                                    </div>
+                                </div>
+                                <ul class="theme-lesson__list">
+                                    <!-- <li *ngFor="let article of lesson.lessonArticles" class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img article"></div>
+                                        <a routerLink="/article/{{article.id}}" class="theme-lessons__link">
+                                            {{ article.name }}
+                                        </a>
+                                        <a *ngIf="isAdmin()" (click)="removeEntity(theme, lesson, article)" class="text-muted ml-auto">Удалить</a>
+                                    </li> -->
+                                    <li *ngFor="let task of lesson.lessonTasks" class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img task"></div>
+                                        <a routerLink="/course/{{courseId}}/task/{{task.id}}" class="theme-lessons__link">
+                                            {{ task.name }}
+                                        </a>
+                                        <a *ngIf="isAdmin()" (click)="removeEntity(theme, lesson, task)" class="removeEntity text-muted">Удалить</a>
+                                    </li>
+                                </ul>
+                                <a *ngIf="isAdmin()" routerLink="/course/{{courseId}}/{{theme.id}}/{{lesson.id}}/addElement" class="text-muted ml-auto addElement">Добавить задачу</a>
+                            </div>
+                            <!-- <div class="theme-lesson">
+                                <div class="theme-lesson__header">
+                                    <h3 class="theme-lesson__title">
+                                        Lesson Title 
+                                        <span class="locked-text">Need lesson “lesson title” to unlock</span>
+                                    </h3>
+                                    <div class="locked-info">
+                                        <img src="/assets/img/lock.svg">
+                                    </div>
+                                </div>
+                                <ul class="theme-lesson__list">
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img video"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Video Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img article"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Article Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img article"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Article Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img task"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Task Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img task"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Task Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="theme-lesson locked">
+                                <div class="theme-lesson__header">
+                                    <h3 class="theme-lesson__title">
+                                        Lesson Title 
+                                        <span class="locked-text">Need lesson “lesson title” to unlock</span>
+                                    </h3>
+                                    <div class="locked-info">
+                                        <img src="/assets/img/lock.svg">
+                                    </div>
+                                </div>
+                                <ul class="theme-lesson__list">
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img video"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Video Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img article"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Article Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img article"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Article Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img task"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Task Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 addLesson">
+                <a *ngIf="isAdmin()" data-toggle="modal" [attr.data-themeId]="theme.id" data-target="#addLessonModal" class="text-muted ml-auto" (click)="getThemeId($event)">Добавить урок</a>
+            </div>
+        </div>
+        <!-- <div class="row align-items-center theme">
+            <div class="col-sm-2">
+                <div class="theme-number">
+                    1
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="theme-body">
+                    <h2 class="theme-title">
+                        Theme Title
+                    </h2>
+                    <div class="theme-description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mollis ultrices turpis massa ac, habitant. Non vel faucibus sed blandit gravida nulla sed morbi. 
+                    </div>
+                    <div class="theme-lessons">
+                        <div class="theme-lessons__info">
+                            <div class="theme-lessons__img">
+                                <img src="/assets/img/theme-lessons.svg">
+                            </div>
+                            <div class="theme-lessons__count">
+                                2 lessons, 3 tasks
+                            </div>
+                            <button class="theme-lessons__btn btn collapsed" type="button" data-toggle="collapse" data-target="#theme-lessons__collapse1"
+                                 aria-expanded="false" aria-controls="theme-lessons__collapse1">
+                            </button>
+                        </div>
+                        <div class="theme-lessons__collapse collapse" id="theme-lessons__collapse1">
+                            <div class="theme-lesson">
+                                <div class="theme-lesson__header">
+                                    <h3 class="theme-lesson__title">
+                                        Lesson Title 
+                                        <span class="locked-text">Need lesson “lesson title” to unlock</span>
+                                    </h3>
+                                    <div class="locked-info">
+                                        <img src="/assets/img/lock.svg">
+                                    </div>
+                                </div>
+                                <ul class="theme-lesson__list">
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img video"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Video Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img article"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Article Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img article"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Article Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img task"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Task Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img task"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Task Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="theme-lesson locked">
+                                <div class="theme-lesson__header">
+                                    <h3 class="theme-lesson__title">
+                                        Lesson Title 
+                                        <span class="locked-text">Need lesson “lesson title” to unlock</span>
+                                    </h3>
+                                    <div class="locked-info">
+                                        <img src="/assets/img/lock.svg">
+                                    </div>
+                                </div>
+                                <ul class="theme-lesson__list">
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img video"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Video Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img article"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Article Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img article"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Article Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img task"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Task Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center theme">
+            <div class="col-sm-2">
+                <div class="theme-number">
+                    2
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="theme-body">
+                    <h2 class="theme-title">
+                        Theme Title
+                    </h2>
+                    <div class="theme-description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mollis ultrices turpis massa ac, habitant. Non vel faucibus sed blandit gravida nulla sed morbi. 
+                    </div>
+                    <div class="theme-lessons">
+                        <div class="theme-lessons__info">
+                            <div class="theme-lessons__img">
+                                <img src="/assets/img/theme-lessons.svg">
+                            </div>
+                            <div class="theme-lessons__count">
+                                2 lessons, 3 tasks
+                            </div>
+                            <button class="theme-lessons__btn btn collapsed" type="button" data-toggle="collapse" data-target="#theme-lessons__collapse2"
+                                 aria-expanded="false" aria-controls="theme-lessons__collapse2">
+                            </button>
+                        </div>
+                        <div class="theme-lessons__collapse collapse" id="theme-lessons__collapse2">
+                            <div class="theme-lesson">
+                                <div class="theme-lesson__header">
+                                    <h3 class="theme-lesson__title">
+                                        Lesson Title 
+                                        <span class="locked-text">Need lesson “lesson title” to unlock</span>
+                                    </h3>
+                                    <div class="locked-info">
+                                        <img src="/assets/img/lock.svg">
+                                    </div>
+                                </div>
+                                <ul class="theme-lesson__list">
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img video"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Video Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img article"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Article Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img article"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Article Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img task"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Task Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img task"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Task Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="theme-lesson locked">
+                                <div class="theme-lesson__header">
+                                    <h3 class="theme-lesson__title">
+                                        Lesson Title 
+                                        <span class="locked-text">Need lesson “lesson title” to unlock</span>
+                                    </h3>
+                                    <div class="locked-info">
+                                        <img src="/assets/img/lock.svg">
+                                    </div>
+                                </div>
+                                <ul class="theme-lesson__list">
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img video"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Video Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img article"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Article Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img article"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Article Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                    <li class="theme-lesson__list-item">
+                                        <div class="theme-lesson__img task"></div>
+                                        <a href="" class="theme-lessons__link">
+                                            Task Title, Lorem ipsum dolor sit ame
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="addThemeModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Добавить тему</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="addThemeForm">
+                <div class="form-group">
+                    <label for="themeName">Название темы</label>
+                    <input id="themeName" formControlName="themeName" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && addThemeFormControls.themeName.errors }" placeholder="Введите название" name="themeName">
+                    <div *ngIf="submitted && addThemeFormControls.themeName.errors" class="invalid-feedback">
+                        <div *ngIf="addThemeFormControls.themeName.errors.required">Обязательно для заполнения</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="addTheme()">Добавить</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="addLessonModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Добавить урок</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="addLessonForm">
+                <div class="form-group">
+                    <label for="lessonName">Название урока</label>
+                    <input id="lessonName" formControlName="lessonName" type="text" class="form-control" [ngClass]="{ 'is-invalid': lessonSubmitted && addLessonFormControls.lessonName.errors }" placeholder="Введите название" name="lessonName">
+                    <div *ngIf="lessonSubmitted && addLessonFormControls.lessonName.errors" class="invalid-feedback">
+                        <div *ngIf="addLessonFormControls.lessonName.errors.required">Обязательно для заполнения</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="addLesson()">Добавить</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="addEntityModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Добавить элемент</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="table tasks-table">
+                <thead>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Название</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let task of tasks">
+                        <td class="text-center">{{ task.id }}</td>
+                        <td class="text-center">
+                            <a routerLink='/task/{{task.id}}'>{{ task.name }}</a>
+                        </td>
+                        <td>
+                            <button type="button" class="close add" aria-label="Add"
+                                    (click)="addEntity(task)">
+                                <span aria-hidden="true">+</span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Закрыть</button>
+        </div>
+        </div>
+    </div>
+</div>

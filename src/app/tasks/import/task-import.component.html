@@ -1,0 +1,42 @@
+<div class="container nopadding import">
+    <div class="import-header">
+        <p class="title">
+            Импорт задачи
+        </p>
+    </div>
+    <div class="import-body box">
+        <div class="card-body">
+            <form [formGroup]="importForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="taskId">ID задачи</label>
+                    <input type="text" formControlName="taskId" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.taskId.errors }" />
+                    <div *ngIf="submitted && f.taskId.errors" class="invalid-feedback">
+                        <div *ngIf="f.taskId.errors.required">Обязательно для заполнения</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="login">Логин от системы Polygon</label>
+                    <input type="text" formControlName="login" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.login.errors }" />
+                    <div *ngIf="submitted && f.login.errors" class="invalid-feedback">
+                        <div *ngIf="f.login.errors.required">Обязательно для заполнения</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль от системы Polygon</label>
+                    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Обязательно для заполнения</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button [disabled]="loading" class="import-btn btn btn-info">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Импортировать
+                    </button>
+                    <a routerLink="/tasks" class="btn">Назад</a>
+                    <div *ngIf="message" class="alert alert-info mt-3 mb-0">{{message}}</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>  

@@ -1,0 +1,57 @@
+<div *ngIf="hasAccess(4)">
+    <div class="container nopadding">
+        <div class="group-create-header">
+            <p class="title">
+                Создание группы
+            </p>
+        </div>
+
+        <div class="group-create col-sm-7 box">
+            <form [formGroup]="groupCreateForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="name">Название группы</label>
+                    <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Название группы обязательно для заполнения</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="members">Участники</label>
+                    <ul>
+                        <li *ngFor="let user of allUsers">
+                            <div class="user-list">
+                                <div class="user-list__item">
+                                    <span class="username">
+                                        {{ user.username + ':' }}
+                                    </span>
+                                    <span class="user__info">
+                                        {{ user.lastname + ' ' + user.firstname + ' ' + user.middlename }}
+                                    </span>
+                                    <button type="button" class="close" aria-label="Close" *ngIf="alreadyContains(user)"
+                                            (click)="removeUser(user)">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <button type="button" class="close add" aria-label="Add" *ngIf="!alreadyContains(user)"
+                                            (click)="addUser(user)">
+                                        <span aria-hidden="true">+</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <button [disabled]="loading" class="btn btn-info">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Создать
+                </button>
+                <div *ngIf="message" class="alert alert-info mt-3 mb-0">{{message}}</div>
+            </form>
+        </div>  
+    </div>   
+</div>
+
+<div *ngIf="!hasAccess(4)">
+    <div class="alert alert-danger mt-3 mb-0">Недостаточно прав</div>
+</div>
+

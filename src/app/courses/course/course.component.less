@@ -1,0 +1,147 @@
+.course {
+    .header {
+        font-family: 'Montserrat', sans-serif;
+        text-align: center;
+        margin-bottom: 65px;
+        margin-top: 15px;
+        &-title {
+            font-size: 36px;
+        }
+    }
+
+    .themes {
+        .theme {
+            margin-bottom: 50px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+            &-number {
+                font-family: 'Open Sans', sans-serif;
+                font-weight: 300;
+                font-size: 80px;
+                margin-left: 50px;
+            }
+            &-body {
+                font-family: 'Montserrat', sans-serif; 
+            }
+            &-title {
+                font-size: 24px;
+                margin-bottom: 15px;
+                .removeTheme {
+                    font-size: 15px;
+                }
+            }
+            &-description {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            &-lessons {
+                font-family: 'Montserrat', sans-serif; 
+                &__info {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                }
+                &__img img {
+                    width: 30px;
+                    height: 30px;
+                    margin-right: 15px;
+                }
+                &__count {
+                    opacity: 60%;
+                    margin-right: 10px;
+                    font-size: 16px;
+                }
+                &__btn {
+                    text-transform: none;
+                    width: 24px;
+                    height: 24px;
+                    &.collapsed {
+                        background: url('/assets/img/chevron-down.svg') no-repeat;
+                    }
+                    &:not(.collapsed) {
+                        background: url('/assets/img/chevron-up.svg') no-repeat;
+                    }
+                }
+            }
+            &-lesson {
+                font-weight: 300;
+                margin-bottom: 20px;
+                border-left: 1px solid #000;
+                padding-left: 20px;
+                .removeEntity {
+                    font-size: 12px;
+                    margin-left: 10px;
+                }
+                &__header {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    margin-bottom: 15px;
+                    font-size: 13px;
+                    position: relative;
+                }
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                &:not(.locked) {
+                    .locked-info, .locked-text {
+                        display: none;
+                    }
+                }
+                &.locked {
+                    pointer-events: none;
+                    opacity: 0.4;
+                    .locked-info {
+                        color: #740A0A;
+                        position: absolute;
+                        top: -4px;
+                        left: 85px;
+                        img {
+                            width: 20px;
+                            height: 20px;
+                        }
+                    }
+                    .locked-text {
+                        display: inline-block;
+                        margin-left: 30px;
+                        color: #740A0A;
+                    }
+                }
+                &__title {
+                    font-size: 13px;
+                    margin-bottom: 0;
+                    margin-right: 10px;
+                }
+                &__list {
+                    font-size: 15px;
+                    &-item {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        margin-bottom: 10px;
+                    }
+                }
+                &__img {
+                    width: 24px;
+                    height: 24px;
+                    margin-right: 10px;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                }
+                &__img.video {
+                    background-image: url('/assets/img/play-button.svg');
+                }
+                &__img.article {
+                    background-image: url('/assets/img/article.svg');
+                }
+                &__img.task {
+                    background-image: url('/assets/img/task.svg');
+                }
+                &:first-child {
+                    margin-top: 24px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="methods-nav">
+        <div class="methods">
+            <h3>Методы API</h3>
+            <ul>
+                <li *ngFor="let method of methods">
+                    <a (click)="getMethodInfo(method)">{{ method.name }}</a>
+                </li>
+            </ul>
+            <div class="alert alert-light" *ngIf="!methods">
+                Загрузка...
+            </div>
+        </div>
+    </div>
+    <div class="method-info" *ngIf="currentMethod">
+        <h2>{{ currentMethod.name }}</h2>
+        <div class="alert alert-light" *ngIf="!currentMethod.description">
+            Загрузка...
+        </div>
+        <p class="method-description">
+            {{ currentMethod.description }}
+        </p>
+        <div *ngIf="currentMethod.params" class="params">
+            <h5>Параметры:</h5>
+            <ul>
+                <li *ngFor="let param of currentMethod.params" class="params__item">
+                    <b>{{ param.name }}</b> - {{ param.description }}<br>
+                    type: {{ param.type }},<br>
+                    required: {{ param.required }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

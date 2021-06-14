@@ -1,0 +1,57 @@
+<div class="col-md-6 offset-md-3 mt-5">
+    <div class="card">
+        <h4 class="card-header">Регистрация</h4>
+        <div class="card-body">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="username">Имя пользователя</label>
+                    <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                        <div *ngIf="f.username.errors.required">Имя пользователя обязательно для заполнения</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">E-mail обязателен для заполнения</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Пароль обязателен для заполнения</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Фамилия</label>
+                    <input type="text" formControlName="lastname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
+                    <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                        <div *ngIf="f.lastname.errors.required">Фамилия обязательна для заполнения</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="firstname">Имя</label>
+                    <input type="text" formControlName="firstname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
+                    <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                        <div *ngIf="f.firstname.errors.required">Имя обязательно для заполнения</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="middlename">Отчество</label>
+                    <input type="text" formControlName="middlename" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.middlename.errors }" />
+                    <div *ngIf="submitted && f.middlename.errors" class="invalid-feedback">
+                        <div *ngIf="f.middlename.errors.required">Отчество обязательно для заполнения</div>
+                    </div>
+                </div>
+                
+                <button [disabled]="loading" class="btn btn-info">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Зарегистрироваться
+                </button>
+                <div *ngIf="message" class="alert alert-info mt-3 mb-0">{{message}}</div>
+            </form>
+        </div>
+    </div>
+</div>

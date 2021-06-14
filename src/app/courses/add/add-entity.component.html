@@ -1,0 +1,47 @@
+<div *ngIf="hasAccess(4)">
+    <div class="container nopadding addUser" *ngIf="tasks">
+        <div class="addTask-header">
+            <p class="title">
+                Добавить задачу
+            </p>
+            <div>
+                <button routerLink="/tasks/import" class="import btn btn-info float-right">Импорт задачи</button>
+            </div>
+        </div>
+    
+        <div class="addTask box" *ngIf="tasks">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="addTask-body">
+                        <table class="table tasks-table">
+                            <thead>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Название</th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let task of tasks">
+                                    <td class="text-center">{{ task.id }}</td>
+                                    <td class="text-center">
+                                        <a routerLink='/task/{{task.id}}'>{{ task.name }}</a>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="close add" aria-label="Add"
+                                                (click)="addTask(task)">
+                                            <span aria-hidden="true">+</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div *ngIf="message" class="alert alert-info mt-3 mb-0">{{message}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>    
+</div>
+
+<div *ngIf="!hasAccess(4)">
+    <div class="alert alert-danger mt-3 mb-0">Недостаточно прав</div>
+</div>

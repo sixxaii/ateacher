@@ -1,0 +1,40 @@
+<div *ngIf="hasAccess(4)">
+    <div class="container nopadding">
+        <div class="course-create-header">
+            <p class="title">
+                Создание курса
+            </p>
+        </div>
+
+        <div class="course-create col-xs-6 box">
+            <form [formGroup]="courseCreateForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="name">Название курса</label>
+                    <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Обязательно для заполнения</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description">Описание курса</label>
+                    <textarea formControlName="description" rows="4" cols="50" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+                    <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                        <div *ngIf="f.description.errors.required">Обязательно для заполнения</div>
+                    </div>
+                </div>
+                
+                
+                <button [disabled]="loading" class="btn btn-info">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Создать
+                </button>
+                <div *ngIf="message" class="alert alert-info mt-3 mb-0">{{message}}</div>
+            </form>
+        </div>  
+    </div>   
+</div>
+
+<div *ngIf="!hasAccess(4)">
+    <div class="alert alert-danger mt-3 mb-0">Недостаточно прав</div>
+</div>
+

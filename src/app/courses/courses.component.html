@@ -1,0 +1,21 @@
+<div class="container nopadding">
+    <div class="courses-header">
+        <p class="title">
+            Курсы
+        </p>
+        <div class="create">
+            <button routerLink="/courses/create" class="btn btn-info float-right create-btn">Создание курса</button>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar courses-nav navbar-expand">
+    <div class="container">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" routerLinkActive="active" routerLink="my">Мои курсы</a>
+            <a class="nav-item nav-link" routerLinkActive="active" routerLink="all">Все курсы</a>
+        </div>
+    </div>
+</nav>
+
+<router-outlet></router-outlet>

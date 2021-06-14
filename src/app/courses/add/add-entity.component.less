@@ -1,0 +1,84 @@
+@import "../../../colors.less";
+
+.import {
+    background-color: @purple;
+    color: @white;
+    outline: none;
+    border: none;
+}
+
+.box {
+    border: 1px solid @lpurple;
+    padding: 20px 20px;
+    border-radius: 15px;
+}
+
+.addTask {
+    &-header {
+        display: flex;
+        justify-content: space-between;
+
+        margin-bottom: 15px;
+    
+        .title {
+            font-size: 24px;
+            font-weight: 400;
+        }
+    
+        .search {
+            font-size: 16px;
+            font-weight: 400;
+            position: relative;
+    
+            &-input {
+                border: 3px solid @purple;
+                border-radius: 15px;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                
+            }
+    
+            &-btn {
+                background-color: @purple;
+                border-radius: 15px;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                color: @white;
+                text-transform: uppercase;
+                
+            }
+        }
+    }
+
+    &-body {
+        display: flex;
+        justify-content: center;
+
+        .table {
+            max-width: 50%;
+            border-collapse: collapse;
+            border-radius: 1em;
+            overflow: hidden;
+            margin-bottom: 0;
+
+            th, td {
+                padding: 1em;
+                border-bottom: 2px solid white; 
+                border-top: none;
+            }
+
+            tr {
+                background: @lpurple;
+            }
+
+            thead {
+                background-color: @purple;
+                color: white;
+            }
+        }
+    }
+}
+
+.filters {
+    margin-top: 30px;
+}

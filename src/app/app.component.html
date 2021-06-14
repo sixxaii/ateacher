@@ -1,0 +1,43 @@
+<!-- nav -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="nav-link logo" routerLink="/">
+            <img src="/assets/img/logo.png">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <div class="navbar-nav">
+                <!-- <a class="nav-link logo" routerLink="/">
+                    <img src="/assets/img/logo.png">
+                </a> -->
+                <!-- <a class="nav-item nav-link" routerLink="doc">Документация</a> -->
+                <a *ngIf="hasAccess(1)" class="nav-item nav-link" routerLink="courses">Курсы</a>
+                <!-- <a class="nav-item nav-link" routerLink="contests">Соревнования</a> -->
+                <!-- <a class="nav-item nav-link" routerLink="tasks">Банк задач</a> -->
+                <a *ngIf="hasAccess(4)" class="nav-item nav-link" routerLink="groups">Группы</a>
+            </div>
+            <div class="navbar-nav ml-auto" *ngIf="currentUser">
+                <a class="nav-item nav-link align-right logout" (click)="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+            <div class="navbar-nav ml-auto" *ngIf="!currentUser">
+                <a class="nav-item nav-link " routerLink="login">Вход</a>
+                <a class="nav-item nav-link " routerLink="register">Регистрация</a>
+            </div>
+        </div>  
+    </div>
+</nav>
+
+<!-- main app container -->
+<div class="margin">
+    <router-outlet></router-outlet>
+</div>
+
+
+
+<footer>
+
+</footer>

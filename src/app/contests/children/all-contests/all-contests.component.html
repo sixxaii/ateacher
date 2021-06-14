@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="contests">
+        <div class="list" id="contests__collapse">
+            <ul class="contest-list" *ngIf="contests">
+                <li *ngFor="let contest of contests" class="contest-list__item box"> 
+                    <div class="contest-info">
+                        <p class="contest-title">{{ contest.name }}</p>
+                        <p class="contest-description">
+                            {{ contest.description }}
+                        </p>
+                    </div>
+                    <a routerLink='/contest/{{contest.id}}'>
+                        <i class="far fa-arrow-alt-circle-right"></i>
+                    </a>
+                </li>
+                <li class="contest-list__item box"> 
+                    <div class="contest-info">
+                        <p class="contest-title">Название соревнования</p>
+                        <p class="contest-description">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam doloremque inventore quibusdam quod itaque exercitationem autem? Quod iste eligendi iure, enim vero voluptatem ratione, eveniet, aspernatur incidunt ad dignissimos. Non.
+                        </p>
+                    </div>
+                    <a>
+                        <i class="far fa-arrow-alt-circle-right"></i>
+                    </a>
+                </li>
+                <li class="contest-list__item box"> 
+                    <div class="contest-info">
+                        <p class="contest-title">Название соревнования</p>
+                        <p class="contest-description">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tem fugit nihil omnis et obcaecati?
+                        </p>
+                    </div>
+                    <a>
+                        <i class="far fa-arrow-alt-circle-right"></i>
+                    </a>
+                </li>
+                <li class="contest-list__item box"> 
+                    <div class="contest-info">
+                        <p class="contest-title">Название соревнования</p>
+                        <p class="contest-description">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam doloremque inventore quibusdam quod itaque exercitationem autem? Quod iste eligendi iure, enim vero voluptatem ratione, eveniet, aspernatur incidunt ad dignissimos. Non.
+                        </p>
+                    </div>
+                    <a>
+                        <i class="far fa-arrow-alt-circle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

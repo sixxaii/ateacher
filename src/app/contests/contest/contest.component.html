@@ -1,0 +1,70 @@
+<div class="contest" *ngIf="contest">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="contest-card card">
+                <div class="card-header card-outer-header">
+                    <h4>{{ contest.name }}</h4>
+                    <a routerLink="/contest/{{contestId}}/results" class="text-muted results ml-auto">Результаты</a>
+                    <!-- <span *ngFor="let tag of contest.tags" class="badge badge-secondary contest-tag">
+                        {{ tag }}
+                    </span> -->
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-between">
+                        <div class="contests-description col-sm-10">
+                            <div class="row contest-description__item">
+                               <div class="col-sm-12">
+                                    <h6>Описание</h6>
+                                    <div class="contest-description-text">
+                                        {{ contest.description }}
+                                    </div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="contest-card card">
+                <div class="card-header card-outer-header">
+                    <h6>Задачи</h6>
+                    <a *ngIf="hasAccess(4)" routerLink="/contest/{{contestId}}/add" class="text-muted addTask ml-auto">Добавить задачу</a>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="message" class="alert alert-info mt-3 mb-0">{{message}}</div>
+                    <div class="table tasks-table">
+                        <thead>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Название</th>
+                            <th *ngIf="hasAccess(4)"></th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let task of contestTasks">
+                                <td class="text-center">{{ task.id }}</td>
+                                <td class="text-center">
+                                    <a routerLink='/contest/{{contestId}}/task/{{task.id}}'>{{ task.name }}</a>
+                                </td>
+                                <td *ngIf="hasAccess(4)">
+                                    <button type="button" class="close" aria-label="Close" (click)="removeTask(task)">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!-- <tfoot>
+                            <div class="p-controls">
+                                <pagination-controls class="ngxpagination" (pageChange)="onPageChange($event)"
+                                                     previousLabel=""
+                                                     nextLabel="">
+                                </pagination-controls>
+                            </div>
+                        </tfoot> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

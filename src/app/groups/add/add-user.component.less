@@ -1,0 +1,48 @@
+@import "../../../colors.less";
+
+.box {
+    border: 1px solid @lpurple;
+    padding: 20px 20px;
+    border-radius: 15px;
+}
+
+.addUser {
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    
+        .title {
+            font-size: 24px;
+            font-weight: 400;
+        }
+    }
+
+    &-body {
+        display: flex;
+        justify-content: center;
+
+        .table {
+            max-width: 60%;
+            border-collapse: collapse;
+            border-radius: 1em;
+            overflow: hidden;
+            margin-bottom: 0;
+
+            th, td {
+                padding: 1em;
+                border-bottom: 2px solid white; 
+                border-top: none;
+            }
+
+            tr {
+                background: @lpurple;
+            }
+
+            thead {
+                background-color: @purple;
+                color: white;
+            }
+        }
+    }
+}

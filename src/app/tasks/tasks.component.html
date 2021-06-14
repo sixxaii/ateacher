@@ -1,0 +1,105 @@
+<div class="row tasks-head">
+    <div class="col-sm-3">
+        <h1>Задачи</h1>
+    </div>
+    <div class="col-sm-2 ml-auto">
+        <button routerLink="/tasks/import" class="btn btn-secondary float-right">Импорт задачи</button>
+    </div>
+</div>
+<div class="row filters-row justify-content-end">
+    <div class="search-row col-sm-12">
+        <div class="input-group">
+            <input type="text" [(ngModel)]="filter.q" class="form-control"
+                (keyup)="search($event.target.value)"
+                placeholder="Поиск по названию">
+            <div class="input-group-append">
+                <button class="btn btn-info" type="button">Поиск</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tasks" *ngIf="tasks">
+    <div *ngFor="let task of (tasks | filter:filter.q)" class="row tasks__item">
+        <div class="col-sm-12">
+            <div class="tasks-card card">
+                <div class="card-header card-outer-header">
+                    <h4>
+                        <a routerLink='/task/{{task.id}}'>{{ task.name }}</a>
+                    </h4>
+                    <span *ngFor="let tag of task.tags" class="badge badge-secondary tasks-tag">
+                        {{ tag }}
+                    </span>
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-between">
+                        <div class="tasks-description col-sm-10">
+                            <div class="row tasks-description__item">
+                               <div class="col-sm-12">
+                                    <h6>Условие</h6>
+                                    <div class="tasks-description-text" [innerHTML]="task.legend">
+                                    </div>
+                               </div>
+                            </div>
+                            <div class="row tasks-description__item">
+                                <div class="col-sm-12">
+                                    <div class="tasks-data">
+                                        <h6>Входные данные</h6>
+                                        <div [innerHTML]="task.input">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tasks-description__item">
+                                <div class="col-sm-12">
+                                    <div class="tasks-data">
+                                        <h6>Выходные данные</h6>
+                                        <div [innerHTML]="task.output">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tasks-inner-cards col-sm-2">
+                            <div class="row align-items-end flex-column">
+                                <div class="tasks-inner-card card text-center bg-light">
+                                    <div class="card-header">
+                                        <h6>Время</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            {{ task.timeLimit }}с
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="tasks-inner-card card text-center bg-light">
+                                    <div class="card-header">
+                                        <h6>Память</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            {{ task.memoryLimit }}мб
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="tasks-inner-card card text-center bg-light">
+                                    <div class="card-header">
+                                        <h6>Сложность</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            {{ task.complexity }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="(tasks | filter:filter.q).length < 1" class="alert alert-secondary"> 
+        Задач не найдено
+    </div>
+</div>

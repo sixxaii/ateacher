@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="courses">
+        <div class="list">
+            <ul class="course-list">
+                <li *ngFor="let course of courses" class="course-list__item box"> 
+                    <p class="course-title"> {{ course.name }} </p>
+                    <p class="course-description">
+                        Создан: {{ course.owner }}
+                    </p>
+                    <p class="course-description">
+                        {{ course.description }}
+                    </p>
+                    <button routerLink='/course/{{course.id}}' type="button" class="btn course-btn">Перейти</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

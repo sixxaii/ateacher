@@ -1,0 +1,44 @@
+<div *ngIf="resultsDefined()">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="contest-card card">
+                <div class="card-header">
+                    <h6>Результаты соревнования</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table contest-result-table">
+                        <thead class="text-center">
+                            <th>ID</th>
+                            <th>Имя пользователя</th>
+                            <th *ngFor="let contestTask of results[0].tasks; let i = index">#{{ i + 1 }}</th>
+                            <th>Решенных задач</th>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr *ngFor="let result of results; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>
+                                    {{ result.user.username }}
+                                </td>
+                                <td *ngFor="let contestTask of result.tasks">
+                                    {{ contestTask.result }}
+                                </td>
+                                <td>{{ result.tasksSolvedCount }}</td>
+                            </tr>
+                        </tbody>
+                        <!-- <tfoot>
+                            <div class="p-controls">
+                                <pagination-controls class="ngxpagination" (pageChange)="onPageChange($event)"
+                                                    previousLabel=""
+                                                    nextLabel="">
+                                </pagination-controls>
+                            </div>
+                        </tfoot> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!resultsDefined() && !isLoading" class="alert alert-secondary"> 
+    Нет результатов
+</div>
